@@ -10,7 +10,7 @@ def get_values(ip, modbus_addr):
 		tuple: (humidity_str, temperature_str, humidity_raw, temperature_raw)
 			   или (None, None, None, None) при ошибке.
 	"""
-	cmd = ["mbpoll", "-c2", "-1", "-q", "-t4:int16", "-a" + str(modbus_addr), ip]
+	cmd = ["mbpoll", "-c2", "-1", "-q", "-t3:int16", "-a" + str(modbus_addr), ip]
 
 	try:
 		result = subprocess.run(cmd, capture_output=True, text=True, check=True)
@@ -23,8 +23,8 @@ def get_values(ip, modbus_addr):
 		sys.stderr.write("Недостаточно строк в выводе утилиты\n")
 		return None, None, None, None
 
-	humidity_raw = int(lines[1].split()[1]) / 10
-	temperature_raw = int(lines[2].split()[1]) / 10
+	humidity_raw = int(lines[2].split()[1]) / 10
+	temperature_raw = int(lines[1].split()[1]) / 10
 
 	humidity_str = f"{humidity_raw} %".ljust(7)
 	temperature_str = f"{temperature_raw} c".ljust(7)

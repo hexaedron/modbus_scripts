@@ -11,7 +11,7 @@ def main():
 	screen.init_screen("192.168.1.40", 2)
 	
 	while True:		
-		values = sht30.get_values()
+		values = sht30.get_values("192.168.1.40", 1)
 		if values[0] is None:
 			# Данные не получены – пропускаем запись и отправку
 			return
