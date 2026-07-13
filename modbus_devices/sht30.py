@@ -1,4 +1,5 @@
 import subprocess
+import sys
 
 def get_values(ip, modbus_addr):
 	"""
@@ -26,7 +27,7 @@ def get_values(ip, modbus_addr):
 	humidity_raw = int(lines[1].split()[1]) / 10
 	temperature_raw = int(lines[2].split()[1]) / 10
 
-	humidity_str = f"{humidity_raw} %".ljust(7)
-	temperature_str = f"{temperature_raw} c".ljust(7)
+	humidity_str = f"{humidity_raw} %".ljust(6)
+	temperature_str = f"{temperature_raw} c".ljust(6)
 
 	return humidity_str, temperature_str, humidity_raw, temperature_raw

@@ -10,8 +10,10 @@ import mqtt_tools.mqtt_pub as mqtt
 def main():
 	
 	screen.init_screen("192.168.1.40", 2)
+	screen.clear_screen("192.168.1.40", 2)
 	
-	while True:		
+	while True:
+		time.sleep(1)
 		values = sht30.get_values("192.168.1.40", 1)
 		if values[0] is None:
 			# Данные не получены – пропускаем запись и отправку

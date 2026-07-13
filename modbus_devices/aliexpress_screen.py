@@ -1,4 +1,5 @@
 import subprocess
+import sys
 
 def init_screen(ip, modbus_addr):
 	"""
@@ -21,6 +22,14 @@ def init_screen(ip, modbus_addr):
 		sys.stderr.write(f"Ошибка отправки данных: {e}\n")
 	except FileNotFoundError:
 		sys.stderr.write("Файл mbpoll не найден\n")
+
+def clear_screen(ip, modbus_addr):
+	"""
+	Чистит экранчик
+	"""
+
+	send_string("      ", ip, modbus_addr)
+
 
 def send_string(data_str, ip, modbus_addr):
 	"""
@@ -53,3 +62,4 @@ def send_string(data_str, ip, modbus_addr):
 		sys.stderr.write(f"Ошибка отправки данных: {e}\n")
 	except FileNotFoundError:
 		sys.stderr.write("Файл mbpoll не найден\n")
+
