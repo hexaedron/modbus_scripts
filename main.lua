@@ -1,6 +1,7 @@
 #!/usr/bin/env lua
 
 -- Подключаем модули
+package.path = "/root/modbus_scripts/?.lua" -- Правильный путь для OpenWrt
 local mqtt   = require("mqtt")
 local pzem   = require("pzem_6l24")
 local sht30  = require("sht30")
