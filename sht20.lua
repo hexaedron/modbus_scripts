@@ -1,4 +1,6 @@
-function get_values(ip, modbus_addr)
+local M = {}
+
+function M.get_values(ip, modbus_addr)
     -- Формируем команду (предполагаем, что ip и modbus_addr не содержат спецсимволов)
     local cmd = "mbpoll -c2 -1 -q -t3:int16 -a" .. modbus_addr .. " " .. ip
 
@@ -61,3 +63,5 @@ function get_values(ip, modbus_addr)
 
     return humidity_str, temperature_str, humidity_raw, temperature_raw
 end
+
+return M

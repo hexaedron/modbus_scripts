@@ -1,5 +1,7 @@
-function get_values(ip, modbus_addr)
-    -- Изменён тип регистров: -t4:int16
+-- sht30.lua
+local M = {}
+
+function M.get_values(ip, modbus_addr)
     local cmd = "mbpoll -c2 -1 -q -t4:int16 -a" .. modbus_addr .. " " .. ip
 
     local p = io.popen(cmd, 'r')
@@ -37,7 +39,6 @@ function get_values(ip, modbus_addr)
         return nil
     end
 
-    -- Порядок извлечения изменён: humidity из lines[2] (вторая строка), temperature из lines[3] (третья)
     local humidity_raw_num = get_second_field(lines[2])
     local temperature_raw_num = get_second_field(lines[3])
 
@@ -49,9 +50,10 @@ function get_values(ip, modbus_addr)
     local humidity_raw = humidity_raw_num / 10
     local temperature_raw = temperature_raw_num / 10
 
-    -- Выравнивание до 6 символов
     local humidity_str = string.format("%-6s", string.format("%.1f %%", humidity_raw))
     local temperature_str = string.format("%-6s", string.format("%.1f c", temperature_raw))
 
     return humidity_str, temperature_str, humidity_raw, temperature_raw
 end
+
+return M
