@@ -8,5 +8,7 @@ return {
     pzem_addr   = 18,             -- его Modbus-адрес
 
     sht30_enabled = false,
-    sht30_addr   = 1
+    sht30_addr   = 1,
+
+    uptime_enabled = true
 }

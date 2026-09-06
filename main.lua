@@ -44,4 +44,17 @@ while true do
             mqtt.pub_string(config.mqtt_host, "/modbus_devices/sht30/temperature", tostring(temperature_raw))
         end
     end
+
+    -- ========= Router uptime ===========
+    if config.uptime_enabled then
+        if count10 >= 10 then
+            count10 = 0
+            local p = io.popen("uptime")
+            local output = p:read("*a"):gsub("[\r\n]+$", "")
+            p:close()
+            mqtt.pub_string(config.mqtt_host, "/devices/router/controls/uptime", output)
+        end
+        count10 =  count10 + 1
+    end
+
 end
